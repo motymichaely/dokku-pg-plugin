@@ -90,7 +90,7 @@ case "$1" in
     ID=$(docker run -d kloadut/postgresql echo '')
     docker wait $ID > /dev/null
     IMAGE=$(docker commit $ID)
-    docker tag $IMAGE $DB_IMAGE
+    docker tag -f $IMAGE $DB_IMAGE
     # Launch container
     ID=$(docker run -v $VOLUME -p 5432 -d $DB_IMAGE /usr/bin/start_pgsql.sh $DB_PASSWORD)
     sleep 4
